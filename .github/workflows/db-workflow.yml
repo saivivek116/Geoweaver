@@ -42,6 +42,9 @@ jobs:
       run: |
         cat ~/geoweaver/application.properties
 
+    - name: check home directory
+      run: echo $HOME
+
     - name: check the content of application.properties of the default location
       run: |
         cat src/main/resources/application.properties
