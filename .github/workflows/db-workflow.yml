@@ -39,9 +39,9 @@ jobs:
         echo "spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect" >> ~/geoweaver/application.properties
 
     - name: Run Tests
-        run: |
-          mvn test jacoco:report
-        working-directory: ${{ github.workspace }}
+      run: |
+        mvn test jacoco:report
+      working-directory: ${{ github.workspace }}
 
     - name: Check If All Tests Pass
       run: |
