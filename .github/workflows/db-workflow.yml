@@ -52,25 +52,25 @@ jobs:
       run: |
         cat src/main/resources/application.properties
 
-    # - name: Run Tests
-    #   run: |
-    #     mvn test jacoco:report
-    #   working-directory: ${{ github.workspace }}
+    - name: Run Tests
+      run: |
+        mvn test jacoco:report
+      working-directory: ${{ github.workspace }}
 
-    # - name: Check If All Tests Pass
-    #   run: |
-    #     if [ $? -eq 0 ]; then
-    #       echo "All tests passed successfully."
-    #     else
-    #       echo "Tests failed."
-    #       exit 1  # Exit with an error code to stop the workflow
-    #     fi
+    - name: Check If All Tests Pass
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "All tests passed successfully."
+        else
+          echo "Tests failed."
+          exit 1  # Exit with an error code to stop the workflow
+        fi
 
-    # - name: Save Geoweaver JaCoCo HTML Report
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: geoweaver-jacoco-coverage-report
-    #     path: target/site/jacoco
+    - name: Save Geoweaver JaCoCo HTML Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: geoweaver-jacoco-coverage-report
+        path: target/site/jacoco
 
     # - name: Run Application (or Test)
     #   run: |
