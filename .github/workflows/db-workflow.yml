@@ -48,6 +48,9 @@ jobs:
     - name: list files in home directory
       run: ls -la $HOME
 
+    - name: workspace directory
+      run: echo ${{ github.workspace }}
+
     - name: check the content of application.properties of the default location
       run: |
         cat src/main/resources/application.properties
