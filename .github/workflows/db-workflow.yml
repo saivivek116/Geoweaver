@@ -37,6 +37,14 @@ jobs:
         echo "spring.datasource.password=geoweaver" >> ~/geoweaver/application.properties
         echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" >> ~/geoweaver/application.properties
         echo "spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect" >> ~/geoweaver/application.properties
+    
+    - name: check the content of application.properties
+      run: |
+        cat ~/geoweaver/application.properties
+
+    - name: check the content of application.properties of the default location
+      run: |
+        cat src/main/resources/application.properties
 
     - name: Run Tests
       run: |
