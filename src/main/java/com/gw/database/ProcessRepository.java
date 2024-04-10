@@ -9,8 +9,10 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 
 /**
- * The ProcessRepository interface provides methods for querying process information from a
- * database. It extends the CrudRepository interface to handle database operations for the GWProcess
+ * The ProcessRepository interface provides methods for querying process
+ * information from a
+ * database. It extends the CrudRepository interface to handle database
+ * operations for the GWProcess
  * entity.
  */
 @Transactional
@@ -22,9 +24,7 @@ public interface ProcessRepository extends CrudRepository<GWProcess, String> {
    * @param keyword The keyword to search for in process names.
    * @return A collection of processes with names similar to the provided keyword.
    */
-  @Query(
-      value = "select * from GWProcess where name like CONCAT('%',:keyword,'%')",
-      nativeQuery = true)
+  @Query(value = "select * from gwprocess where name like CONCAT('%',:keyword,'%')", nativeQuery = true)
   Collection<GWProcess> findProcessesByNameAlike(@Param("keyword") String keyword);
 
   /**
@@ -41,9 +41,7 @@ public interface ProcessRepository extends CrudRepository<GWProcess, String> {
    * @param owner The owner's username.
    * @return A collection of private processes owned by the specified user.
    */
-  @Query(
-      value = "select * from gwprocess where owner = ?1 and confidential = 'TRUE'",
-      nativeQuery = true)
+  @Query(value = "select * from gwprocess where owner = ?1 and confidential = 'TRUE'", nativeQuery = true)
   Collection<GWProcess> findAllPrivateByOwner(String owner);
 
   /**
@@ -65,7 +63,8 @@ public interface ProcessRepository extends CrudRepository<GWProcess, String> {
   /**
    * Find processes written in a built-in language or system.
    *
-   * @return A collection of processes implemented using a built-in language or system.
+   * @return A collection of processes implemented using a built-in language or
+   *         system.
    */
   @Query(value = "select * from gwprocess where lang = 'builtin'", nativeQuery = true)
   Collection<GWProcess> findBuiltinProcess();
