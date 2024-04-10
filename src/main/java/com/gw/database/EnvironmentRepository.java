@@ -29,7 +29,7 @@ public interface EnvironmentRepository extends CrudRepository<Environment, Strin
    * @return A collection of environment configurations matching the specified
    *         criteria.
    */
-  @Query("SELECT e FROM environment e WHERE e.hostobj.id = :hostid AND e.bin = :bin AND e.pyenv = :pyenv AND e.basedir = :basedir")
+  @Query("SELECT e FROM Environment e WHERE e.hostobj.id = :hostid AND e.bin = :bin AND e.pyenv = :pyenv AND e.basedir = :basedir")
   Collection<Environment> findEnvByID_BIN_ENV_BaseDir(String hostid, String bin, String pyenv, String basedir);
 
   /**
@@ -41,7 +41,7 @@ public interface EnvironmentRepository extends CrudRepository<Environment, Strin
    * @return A collection of environment configurations matching the specified
    *         host and binary path.
    */
-  @Query("SELECT e FROM environment e WHERE e.hostobj.id = :hostid AND e.bin = :bin")
+  @Query("SELECT e FROM Environment e WHERE e.hostobj.id = :hostid AND e.bin = :bin")
   Collection<Environment> findEnvByID_BIN(String hostid, String bin);
 
   /**
@@ -51,7 +51,7 @@ public interface EnvironmentRepository extends CrudRepository<Environment, Strin
    * @return A collection of environment configurations associated with the
    *         specified host.
    */
-  @Query("SELECT e FROM environment e WHERE e.hostobj.id = :hostid")
+  @Query("SELECT e FROM Environment e WHERE e.hostobj.id = :hostid")
   Collection<Environment> findEnvByHost(String hostid);
 
 }
