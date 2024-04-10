@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class GWSearchTool {
 
-  @Autowired HostRepository hostrepository;
+  @Autowired
+  HostRepository hostrepository;
 
-  @Autowired ProcessRepository processrepository;
+  @Autowired
+  ProcessRepository processrepository;
 
-  @Autowired WorkflowRepository workflowrepository;
+  @Autowired
+  WorkflowRepository workflowrepository;
 
   private Logger logger = Logger.getLogger(GWSearchTool.class);
 
@@ -31,7 +34,8 @@ public class GWSearchTool {
 
     for (int i = 0; i < res.size(); i++) {
 
-      if (i != 0) json.append(", ");
+      if (i != 0)
+        json.append(", ");
 
       json.append("{ \"id\": \"")
           .append(res.get(i).getId())
@@ -100,18 +104,18 @@ public class GWSearchTool {
 
   private List<Resource> searchHost(String keywords) {
 
-    List<Resource> res = new ArrayList();
+    List<Resource> res = new ArrayList<>();
 
     try {
 
       Collection<Host> hostlist = hostrepository.findHostsByNameAlike(keywords);
 
-      //			StringBuffer sql = new StringBuffer("select * from hosts where name like
+      // StringBuffer sql = new StringBuffer("select * from hosts where name like
       // '%").append(keywords).append("%'; ");
       //
-      //			logger.debug(sql);
+      // logger.debug(sql);
       //
-      //			ResultSet rs = DataBaseOperation.query(sql.toString());
+      // ResultSet rs = DataBaseOperation.query(sql.toString());
 
       GWSearchTool tool = new GWSearchTool();
 
@@ -144,16 +148,17 @@ public class GWSearchTool {
 
   private List<Resource> searchProcess(String keywords) {
 
-    List<Resource> res = new ArrayList();
+    List<Resource> res = new ArrayList<>();
 
     try {
 
-      //			StringBuffer sql = new StringBuffer("select * from process_type where name like
+      // StringBuffer sql = new StringBuffer("select * from process_type where name
+      // like
       // '%").append(keywords).append("%'; ");
       //
-      //			logger.debug(sql);
+      // logger.debug(sql);
       //
-      //			ResultSet rs = DataBaseOperation.query(sql.toString());
+      // ResultSet rs = DataBaseOperation.query(sql.toString());
 
       Collection<GWProcess> processlist = processrepository.findProcessesByNameAlike(keywords);
 
@@ -188,16 +193,17 @@ public class GWSearchTool {
 
   private List<Resource> searchWorkflow(String keywords) {
 
-    List<Resource> res = new ArrayList();
+    List<Resource> res = new ArrayList<>();
 
     try {
 
-      //			StringBuffer sql = new StringBuffer("select * from abstract_model where name like
+      // StringBuffer sql = new StringBuffer("select * from abstract_model where name
+      // like
       // '%").append(keywords).append("%'; ");
       //
-      //			logger.debug(sql);
+      // logger.debug(sql);
       //
-      //			ResultSet rs = DataBaseOperation.query(sql.toString());
+      // ResultSet rs = DataBaseOperation.query(sql.toString());
 
       Collection<Workflow> workflowlist = workflowrepository.findProcessesByNameAlike(keywords);
 
