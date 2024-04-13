@@ -37,23 +37,6 @@ jobs:
         echo "spring.datasource.password=geoweaver" >> ~/geoweaver/application.properties
         echo "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver" >> ~/geoweaver/application.properties
         echo "spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect" >> ~/geoweaver/application.properties
-    
-    - name: check the content of application.properties
-      run: |
-        cat ~/geoweaver/application.properties
-
-    - name: check home directory
-      run: echo $HOME
-
-    - name: list files in home directory
-      run: ls -la $HOME
-
-    - name: workspace directory
-      run: echo ${{ github.workspace }}
-
-    - name: check the content of application.properties of the default location
-      run: |
-        cat src/main/resources/application.properties
 
     - name: Run Tests
       run: |
@@ -75,13 +58,13 @@ jobs:
         name: geoweaver-jacoco-coverage-report
         path: target/site/jacoco
 
-    # - name: Run Application (or Test)
-    #   run: |
-    #     # Run your application or a basic test to ensure everything is set up properly.
-    #     # Example Java application run (adjust command according to your project):
-    #     java -jar build/libs/myapp.jar
-    #     # Or run a simple test to verify the setup
-    #     # ./gradlew test # or mvn test
+    - name: Run Application (or Test)
+      run: |
+        # Run your application or a basic test to ensure everything is set up properly.
+        # Example Java application run (adjust command according to your project):
+        java -jar build/libs/myapp.jar
+        # Or run a simple test to verify the setup
+        # ./gradlew test # or mvn test
   test-postgresql:
     runs-on: ubuntu-latest
 
@@ -113,23 +96,6 @@ jobs:
         echo "spring.datasource.password=geoweaver" >> ~/geoweaver/application.properties
         echo "spring.datasource.driver-class-name=org.postgresql.Driver" >> ~/geoweaver/application.properties
         echo "spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect" >> ~/geoweaver/application.properties
-    
-    - name: check the content of application.properties
-      run: |
-        cat ~/geoweaver/application.properties
-
-    - name: check home directory
-      run: echo $HOME
-
-    - name: list files in home directory
-      run: ls -la $HOME
-
-    - name: workspace directory
-      run: echo ${{ github.workspace }}
-
-    - name: check the content of application.properties of the default location
-      run: |
-        cat src/main/resources/application.properties
 
     - name: Run Tests
       run: |
@@ -151,11 +117,11 @@ jobs:
         name: geoweaver-jacoco-coverage-report
         path: target/site/jacoco
 
-    # - name: Run Application (or Test)
-    #   run: |
-    #     # Run your application or a basic test to ensure everything is set up properly.
-    #     # Example Java application run (adjust command according to your project):
-    #     java -jar build/libs/myapp.jar
-    #     # Or run a simple test to verify the setup
-    #     # ./gradlew test # or mvn test
+    - name: Run Application (or Test)
+      run: |
+        # Run your application or a basic test to ensure everything is set up properly.
+        # Example Java application run (adjust command according to your project):
+        java -jar build/libs/myapp.jar
+        # Or run a simple test to verify the setup
+        # ./gradlew test # or mvn test
 
