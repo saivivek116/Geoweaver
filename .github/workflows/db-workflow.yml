@@ -58,13 +58,6 @@ jobs:
         name: geoweaver-jacoco-coverage-report
         path: target/site/jacoco
 
-    - name: Run Application (or Test)
-      run: |
-        # Run your application or a basic test to ensure everything is set up properly.
-        # Example Java application run (adjust command according to your project):
-        java -jar build/libs/myapp.jar
-        # Or run a simple test to verify the setup
-        # ./gradlew test # or mvn test
   test-postgresql:
     runs-on: ubuntu-latest
 
@@ -116,12 +109,4 @@ jobs:
       with:
         name: geoweaver-jacoco-coverage-report
         path: target/site/jacoco
-
-    - name: Run Application (or Test)
-      run: |
-        # Run your application or a basic test to ensure everything is set up properly.
-        # Example Java application run (adjust command according to your project):
-        java -jar build/libs/myapp.jar
-        # Or run a simple test to verify the setup
-        # ./gradlew test # or mvn test
 
