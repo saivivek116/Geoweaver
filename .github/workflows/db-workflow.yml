@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  test-mysql:
     runs-on: ubuntu-latest
 
     services:
@@ -82,3 +82,80 @@ jobs:
     #     java -jar build/libs/myapp.jar
     #     # Or run a simple test to verify the setup
     #     # ./gradlew test # or mvn test
+  test-postgresql:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_PASSWORD: geoweaver
+          POSTGRES_DB: geoweaver
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready -U postgres" --health-interval=10s --health-timeout=5s --health-retries=5
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        architecture: x64
+
+    - name: Create geoweaver directory and application.properties
+      run: |
+        mkdir -p ~/geoweaver
+        echo "spring.datasource.url=jdbc:postgresql://localhost:5432/geoweaver" >> ~/geoweaver/application.properties
+        echo "spring.datasource.username=postgres" >> ~/geoweaver/application.properties
+        echo "spring.datasource.password=geoweaver" >> ~/geoweaver/application.properties
+        echo "spring.datasource.driver-class-name=org.postgresql.Driver" >> ~/geoweaver/application.properties
+        echo "spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect" >> ~/geoweaver/application.properties
+    
+    - name: check the content of application.properties
+      run: |
+        cat ~/geoweaver/application.properties
+
+    - name: check home directory
+      run: echo $HOME
+
+    - name: list files in home directory
+      run: ls -la $HOME
+
+    - name: workspace directory
+      run: echo ${{ github.workspace }}
+
+    - name: check the content of application.properties of the default location
+      run: |
+        cat src/main/resources/application.properties
+
+    - name: Run Tests
+      run: |
+        mvn test jacoco:report
+      working-directory: ${{ github.workspace }}
+
+    - name: Check If All Tests Pass
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "All tests passed successfully."
+        else
+          echo "Tests failed."
+          exit 1  # Exit with an error code to stop the workflow
+        fi
+
+    - name: Save Geoweaver JaCoCo HTML Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: geoweaver-jacoco-coverage-report
+        path: target/site/jacoco
+
+    # - name: Run Application (or Test)
+    #   run: |
+    #     # Run your application or a basic test to ensure everything is set up properly.
+    #     # Example Java application run (adjust command according to your project):
+    #     java -jar build/libs/myapp.jar
+    #     # Or run a simple test to verify the setup
+    #     # ./gradlew test # or mvn test
+
