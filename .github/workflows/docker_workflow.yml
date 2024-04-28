@@ -1,4 +1,4 @@
-name: Build and Push Docker image
+name: docker workflow
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/Geoweaver:${{ env.VERSION }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/geoweaver:${{ env.VERSION }}
 
     - name: Logout from Docker
       if: always()
